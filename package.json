@@ -4,7 +4,11 @@
   "description": "An assistant to help you keep track of your spending at the store",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:web": "npm --workspace apps/web run dev",
+    "build:web": "npm --workspace apps/web run build",
+    "build:mobile": "npm run build:web && npx cap copy --project-dir=apps/mobile",
+    "open:ios": "npx cap open ios --project-dir=apps/mobile",
+    "open:android": "npx cap open android --project-dir=apps/mobile"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,10 @@
   "bugs": {
     "url": "https://bitbucket.org/gingerfire/shopbot-2/issues"
   },
-  "homepage": "https://bitbucket.org/gingerfire/shopbot-2#readme"
+  "homepage": "https://bitbucket.org/gingerfire/shopbot-2#readme",
+  "dependencies": {
+    "@capacitor/cli": "^7.4.3",
+    "@capacitor/core": "^7.4.3"
+  },
+  "workspaces": ["apps/*"]
 }
