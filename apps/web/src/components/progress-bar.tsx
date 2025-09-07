@@ -1,7 +1,7 @@
 import { useGlobalContext } from '@/context/global'
 import { Table, TableBody, TableRow, TableCell } from '@mui/material'
 
-export default function ProgressBar() {
+export default function ProgressBar(): ReactElment {
 	const { budget, subTotal, taxRate, taxAmount, total } = useGlobalContext()
 
 	const subTotalW: Number = (subTotal / budget) * 100

@@ -16,16 +16,12 @@ export default function ShoppingList(): ReactElement {
 	const { items } = useGlobalContext()
 
 	return (
-		<TableContainer sx={{ height: 'calc(100dvh - 150px)' }}>
+		<TableContainer
+			sx={{
+				height: 'calc(100dvh - 150px)',
+			}}
+		>
 			<Table stickyHeader>
-				<TableHead>
-					<TableRow>
-						<TableCell className='w-full whitespace-nowrap'>Item Name</TableCell>
-						<TableCell className='whitespace-nowrap'>Quantity</TableCell>
-						<TableCell className='whitespace-nowrap'>Unit Price</TableCell>
-						<TableCell className='whitespace-nowrap'>Item Price</TableCell>
-					</TableRow>
-				</TableHead>
 				<TableBody>
 					{items.map((item: ShoppingListItemType, i: Number) => (
 						<ShoppingListItem item={item} key={i} />

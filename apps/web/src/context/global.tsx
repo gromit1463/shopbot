@@ -19,7 +19,7 @@ export default function GlobalProvider({ children }) {
 
 	useEffect(() => {
 		setItems([
-			{ barcode: '12345678', name: 'Apple', quantity: 2.5, unitPrice: 0.99 },
+			{ barcode: '12345678', name: 'Apple', quantity: 20, unitPrice: 30.99 },
 			{ barcode: '23456789', name: 'Banana', quantity: 1.8, unitPrice: 0.49 },
 			{ barcode: '34567890', name: 'Carrot', quantity: 3.2, unitPrice: 0.79 },
 			{ barcode: '45678901', name: 'Tomato', quantity: 4.1, unitPrice: 1.29 },
