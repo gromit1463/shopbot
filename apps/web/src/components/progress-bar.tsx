@@ -4,8 +4,8 @@ import { Table, TableBody, TableRow, TableCell } from '@mui/material'
 export default function ProgressBar(): ReactElment {
 	const { budget, subTotal, taxRate, taxAmount, total } = useGlobalContext()
 
-	const subTotalW: Number = (subTotal / budget) * 100
-	const taxAmountW: Number = (taxAmount / budget) * 100
+	const subTotalW: number = (subTotal / budget) * 100
+	const taxAmountW: number = (taxAmount / budget) * 100
 
 	return (
 		<div className='w-full sticky z-1 bg-white' style={{ top: 0 }}>

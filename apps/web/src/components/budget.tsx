@@ -3,7 +3,7 @@ import { Drawer, Container, Box, Stack, Grid, Button } from '@mui/material'
 import Keypad from './keypad'
 
 export default function BudgetDialog({ open, onClose }: BudgetDialogProps): ReactElement {
-	const [value, setValue] = useState<Number>(0)
+	const [value, setValue] = useState<number>(0)
 
 	return (
 		<Drawer

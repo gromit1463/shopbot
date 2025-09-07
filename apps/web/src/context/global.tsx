@@ -11,11 +11,11 @@ export const useGlobalContext = () => useContext(GlobalContext)
 export default function GlobalProvider({ children }) {
 	const [selectedPage, setSelectedPage] = useState<string | null>(null)
 	const [items, setItems] = useState<ShoppingListItemType[]>([])
-	const [budget, setBudget] = useState<Number>(null)
-	const [subTotal, setSubTotal] = useState<Number>(null)
-	const [taxRate, setTaxRate] = useState<Number>(null)
-	const [taxAmount, setTaxAmount] = useState<Number>(null)
-	const [total, setTotal] = useState<Number>(null)
+	const [budget, setBudget] = useState<number>(null)
+	const [subTotal, setSubTotal] = useState<number>(null)
+	const [taxRate, setTaxRate] = useState<number>(null)
+	const [taxAmount, setTaxAmount] = useState<number>(null)
+	const [total, setTotal] = useState<number>(null)
 
 	useEffect(() => {
 		setItems([
@@ -55,13 +55,13 @@ export default function GlobalProvider({ children }) {
 	}, [])
 
 	useEffect(() => {
-		const subT: Number = items.reduce(
+		const subT: number = items.reduce(
 			(acc, item) => acc + item.quantity * item.unitPrice,
 			0
 		)
 		setSubTotal(subT)
 
-		const taxA: Number = (subT * taxRate) / 100
+		const taxA: number = (subT * taxRate) / 100
 		setTaxAmount(taxA)
 
 		setTotal(subT + taxA)

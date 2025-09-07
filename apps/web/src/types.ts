@@ -4,8 +4,8 @@ export type AppFrameProps = {
 
 export type KeypadProps = {
 	title: HTMLElement | string | null | undefined
-	initialValue: Number
-	onChange: (value: Number) => void
+	initialValue: number
+	onChange: (value: number) => void
 }
 
 export type BudgetDialogProps = {
@@ -16,6 +16,6 @@ export type BudgetDialogProps = {
 export type ShoppingListItemType = {
 	barcode: string
 	name: string
-	quantity: Number
-	unitPrice: Number
+	quantity: number
+	unitPrice: number
 }

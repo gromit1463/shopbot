@@ -8,17 +8,17 @@ const shoppingList = (set, get) => ({
 	total: 0,
 	cart: [],
 	addItem: ({ barcode, name, qty, unitPrice }: ShoppingListItemType): boolean => {},
-	removeItem: (id: Number): boolean => {},
+	removeItem: (id: number): boolean => {},
 	editItem: (
-		id: Number,
+		id: number,
 		{ barcode, name, qty, unitPrice }: ShoppingListItemType
 	): boolean => {},
-	setBudget: (amt: Number): boolean => {
+	setBudget: (amt: number): boolean => {
 		set((state) => ({
 			budget: amt,
 		}))
 	},
-	setTaxRate: (rate: Number): boolean => {},
+	setTaxRate: (rate: number): boolean => {},
 	clearList: (): boolean => {},
 })
 

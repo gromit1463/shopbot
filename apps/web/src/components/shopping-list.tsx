@@ -23,7 +23,7 @@ export default function ShoppingList(): ReactElement {
 		>
 			<Table stickyHeader>
 				<TableBody>
-					{items.map((item: ShoppingListItemType, i: Number) => (
+					{items.map((item: ShoppingListItemType, i: number) => (
 						<ShoppingListItem item={item} key={i} />
 					))}
 				</TableBody>
