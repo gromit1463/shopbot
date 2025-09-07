@@ -1,8 +1,11 @@
+import { ReactElement } from 'react'
 import { useGlobalContext } from '@/context/global'
 import { Table, TableBody, TableRow, TableCell } from '@mui/material'
+import { GlobalContextType } from '@/types'
 
-export default function ProgressBar(): ReactElment {
-	const { budget, subTotal, taxRate, taxAmount, total } = useGlobalContext()
+export default function ProgressBar(): ReactElement {
+	const { budget, subTotal, taxRate, taxAmount, total } =
+		useGlobalContext() as GlobalContextType
 
 	const subTotalW: number = (subTotal / budget) * 100
 	const taxAmountW: number = (taxAmount / budget) * 100

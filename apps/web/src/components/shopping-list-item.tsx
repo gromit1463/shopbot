@@ -13,8 +13,6 @@ import {
 import { ShoppingListItemProps } from '@/types'
 
 export default function ShoppingListItem({ item }: ShoppingListItemProps): ReactElement {
-	const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
-
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 	const open = Boolean(anchorEl)
 	const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -52,7 +50,7 @@ export default function ShoppingListItem({ item }: ShoppingListItemProps): React
 				</TableCell>
 				<TableCell>
 					<Button className='w-[24px]! min-w-[24px]!' onClick={handleClick}>
-						<Icon fontSize='sm' className='material-symbols-rounded'>
+						<Icon fontSize='small' className='material-symbols-rounded'>
 							more_vert
 						</Icon>
 					</Button>
@@ -82,7 +80,7 @@ export default function ShoppingListItem({ item }: ShoppingListItemProps): React
 				</TableCell>
 				<TableCell>
 					<Button className='w-[24px]! min-w-[24px]!' onClick={handleClick}>
-						<Icon fontSize='sm' className='material-symbols-rounded'>
+						<Icon fontSize='small' className='material-symbols-rounded'>
 							more_vert
 						</Icon>
 					</Button>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, ReactElement } from 'react'
 import { KeypadProps } from '@/types'
 import { Grid, Button, Icon, Box, Stack } from '@mui/material'
 
@@ -63,7 +63,7 @@ export default function Keypad({
 				</Grid>
 				<Grid size={4}>
 					<Button variant='outlined' className={buttonClass}>
-						<Icon fontSize='sm' className='material-symbols-rounded'>
+						<Icon fontSize='small' className='material-symbols-rounded'>
 							backspace
 						</Icon>
 					</Button>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, ReactElement } from 'react'
 import { AppFrameProps } from '@/types'
 import { Container, BottomNavigation, BottomNavigationAction, Icon } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'

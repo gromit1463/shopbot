@@ -1,21 +1,29 @@
 'use client'
 
-import { ShoppingListItemType } from '@/types'
+import { GlobalContextType, GlobalProviderProps, ShoppingListItemType } from '@/types'
 import { useState, useEffect, createContext, useContext } from 'react'
-import { BottomNavigation } from '@mui/material'
 
-const GlobalContext = createContext()
+// default value
+const defaultContext: GlobalContextType = {
+	items: [],
+	budget: 0,
+	subTotal: 0,
+	taxRate: 0,
+	taxAmount: 0,
+	total: 0,
+}
+
+const GlobalContext = createContext<GlobalContextType>(defaultContext)
 
 export const useGlobalContext = () => useContext(GlobalContext)
 
-export default function GlobalProvider({ children }) {
-	const [selectedPage, setSelectedPage] = useState<string | null>(null)
+export default function GlobalProvider({ children }: GlobalProviderProps) {
 	const [items, setItems] = useState<ShoppingListItemType[]>([])
-	const [budget, setBudget] = useState<number>(null)
-	const [subTotal, setSubTotal] = useState<number>(null)
-	const [taxRate, setTaxRate] = useState<number>(null)
-	const [taxAmount, setTaxAmount] = useState<number>(null)
-	const [total, setTotal] = useState<number>(null)
+	const [budget, setBudget] = useState<number>(0)
+	const [subTotal, setSubTotal] = useState<number>(0)
+	const [taxRate, setTaxRate] = useState<number>(0)
+	const [taxAmount, setTaxAmount] = useState<number>(0)
+	const [total, setTotal] = useState<number>(0)
 
 	useEffect(() => {
 		setItems([

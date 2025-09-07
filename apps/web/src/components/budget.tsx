@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, ReactElement } from 'react'
 import { Drawer, Container, Box, Stack, Grid, Button } from '@mui/material'
 import Keypad from './keypad'
+import { BudgetDialogProps } from '@/types'
 
 export default function BudgetDialog({ open, onClose }: BudgetDialogProps): ReactElement {
 	const [value, setValue] = useState<number>(0)

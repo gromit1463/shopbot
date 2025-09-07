@@ -1,26 +1,34 @@
-import { ShoppingListItemType } from '@/types'
+import { ShoppingListItemType, ShoppingListState } from '@/types'
 import { create } from 'zustand'
 
-const shoppingList = (set, get) => ({
+export const useShoppingListStore = create<ShoppingListState>((set, get) => ({
 	budget: 0,
 	taxRate: 0,
 	subTotal: 0,
 	total: 0,
 	cart: [],
-	addItem: ({ barcode, name, qty, unitPrice }: ShoppingListItemType): boolean => {},
-	removeItem: (id: number): boolean => {},
+	addItem: ({ barcode, name, quantity, unitPrice }: ShoppingListItemType): boolean => {
+		return true
+	},
+	removeItem: (id: number): boolean => {
+		return true
+	},
 	editItem: (
 		id: number,
-		{ barcode, name, qty, unitPrice }: ShoppingListItemType
-	): boolean => {},
+		{ barcode, name, quantity, unitPrice }: ShoppingListItemType
+	): boolean => {
+		return true
+	},
 	setBudget: (amt: number): boolean => {
 		set((state) => ({
 			budget: amt,
 		}))
+		return true
 	},
-	setTaxRate: (rate: number): boolean => {},
-	clearList: (): boolean => {},
-})
-
-const useShoppingListStore = create(shoppingList)
-export default useShoppingListStore
+	setTaxRate: (rate: number): boolean => {
+		return true
+	},
+	clearList: (): boolean => {
+		return true
+	},
+}))

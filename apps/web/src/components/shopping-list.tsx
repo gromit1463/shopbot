@@ -1,19 +1,13 @@
 'use client'
 
-import {
-	TableContainer,
-	Table,
-	TableHead,
-	TableBody,
-	TableRow,
-	TableCell,
-} from '@mui/material'
+import { ReactElement } from 'react'
+import { TableContainer, Table, TableBody } from '@mui/material'
 import ShoppingListItem from './shopping-list-item'
-import { ShoppingListItemType } from '@/types'
+import { GlobalContextType, ShoppingListItemType } from '@/types'
 import { useGlobalContext } from '@/context/global'
 
 export default function ShoppingList(): ReactElement {
-	const { items } = useGlobalContext()
+	const { items } = useGlobalContext() as GlobalContextType
 
 	return (
 		<TableContainer
