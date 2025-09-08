@@ -24,5 +24,7 @@
     "@capacitor/cli": "^7.4.3",
     "@capacitor/core": "^7.4.3"
   },
-  "workspaces": ["apps/*"]
+  "workspaces": [
+    "apps/*"
+  ]
 }
