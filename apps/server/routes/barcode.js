@@ -11,6 +11,10 @@ const mongo = new MongoClient(process.env.MONGODB_URI, {
 	maxPoolSize: 50,
 })
 
+function padBarcode(barcode) {
+	return barcode.padStart(20, '0')
+}
+
 router.get('/barcode', function (req, res, next) {
 	!(async () => {
 		try {
@@ -21,12 +25,12 @@ router.get('/barcode', function (req, res, next) {
 				await mongo.connect()
 				const shopbot = mongo.db('shopbot')
 				const upc = shopbot.collection('upc')
-				const filter = { barcode: search }
+				const query = { barcode: padBarcode(search) }
 
-				const count = await upc.countDocuments(filter)
+				const count = await upc.countDocuments(query)
 
 				if (count > 0) {
-					const result = await cursor.find(filter).toArray()
+					const result = await upc.find(query).toArray()
 					res.json(result)
 					return next()
 				} else {
@@ -40,6 +44,7 @@ router.get('/barcode', function (req, res, next) {
 
 					if (json?.success) {
 						// write to Mongo
+						json.barcode = padBarcode(json.barcode)
 						await upc.insertOne(json)
 						res.json(json)
 						return next()
