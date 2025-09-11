@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import GlobalProvider from '@/context/global'
 import AppFrame from '@/components/app-frame'
 
 export const metadata: Metadata = {
@@ -22,9 +21,7 @@ export default function RootLayout({
 				/>
 			</head>
 			<body>
-				<GlobalProvider>
-					<AppFrame>{children}</AppFrame>
-				</GlobalProvider>
+				<AppFrame>{children}</AppFrame>
 			</body>
 		</html>
 	)

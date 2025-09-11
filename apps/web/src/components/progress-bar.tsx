@@ -1,11 +1,11 @@
 import { ReactElement } from 'react'
-import { useGlobalContext } from '@/context/global'
 import { Table, TableBody, TableRow, TableCell } from '@mui/material'
-import { GlobalContextType } from '@/types'
+import { ShoppingListState } from '@/types'
+import { useShoppingListState } from '@/stores/shopping-list-state'
 
 export default function ProgressBar(): ReactElement {
 	const { budget, subTotal, taxRate, taxAmount, total } =
-		useGlobalContext() as GlobalContextType
+		useShoppingListState() as ShoppingListState
 
 	const subTotalW: number = (subTotal / budget) * 100
 	const taxAmountW: number = (taxAmount / budget) * 100
@@ -15,10 +15,12 @@ export default function ProgressBar(): ReactElement {
 			<Table size='small'>
 				<TableBody>
 					<TableRow>
-						<TableCell>Subtotal:</TableCell>
-						<TableCell align='right'>{subTotal?.toFixed(2)}</TableCell>
-						<TableCell>Budget:</TableCell>
-						<TableCell align='right'>
+						<TableCell className='w-[1%] whitespace-nowrap'>Subtotal:</TableCell>
+						<TableCell className='w-[49%]' align='right'>
+							{subTotal?.toFixed(2)}
+						</TableCell>
+						<TableCell className='w-[1%] whitespace-nowrap'>Budget:</TableCell>
+						<TableCell className='w-[49%]' align='right'>
 							<span
 								className={total > budget ? 'font-bold px-1 -mr-1' : 'px-1 -mr-1'}
 							>
@@ -27,10 +29,14 @@ export default function ProgressBar(): ReactElement {
 						</TableCell>
 					</TableRow>
 					<TableRow>
-						<TableCell>Tax ({taxRate}%):</TableCell>
-						<TableCell align='right'>{taxAmount?.toFixed(2)}</TableCell>
-						<TableCell>Total:</TableCell>
-						<TableCell align='right'>
+						<TableCell className='w-[1%] whitespace-nowrap'>
+							Tax ({taxRate}%):
+						</TableCell>
+						<TableCell className='w-[49%]' align='right'>
+							{taxAmount?.toFixed(2)}
+						</TableCell>
+						<TableCell className='w-[1%] whitespace-nowrap'>Total:</TableCell>
+						<TableCell className='w-[49%]' align='right'>
 							<span
 								className={
 									total > budget

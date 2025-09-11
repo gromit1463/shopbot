@@ -5,10 +5,14 @@ import { AppFrameProps } from '@/types'
 import { Container, BottomNavigation, BottomNavigationAction, Icon } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from '@/theme'
-import BudgetDialog from './budget'
+import Budget from './budget'
+import TaxRate from './tax-rate'
+import Scan from './scan'
 
 export default function AppFrame({ children }: AppFrameProps): ReactElement {
 	const [budgetOpen, setBudgetOpen] = useState<boolean>(false)
+	const [taxRateOpen, setTaxRateOpen] = useState<boolean>(false)
+	const [scanOpen, setScanOpen] = useState<boolean>(false)
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -39,6 +43,7 @@ export default function AppFrame({ children }: AppFrameProps): ReactElement {
 								percent
 							</Icon>
 						}
+						onClick={() => setTaxRateOpen(true)}
 					/>
 					<BottomNavigationAction
 						sx={{
@@ -62,6 +67,7 @@ export default function AppFrame({ children }: AppFrameProps): ReactElement {
 								barcode_scanner
 							</Icon>
 						}
+						onClick={() => setScanOpen(true)}
 					/>
 					<BottomNavigationAction
 						sx={{
@@ -83,12 +89,18 @@ export default function AppFrame({ children }: AppFrameProps): ReactElement {
 						label='Clear'
 						icon={
 							<Icon fontSize='medium' className='material-symbols-rounded'>
-								delete
+								playlist_remove
 							</Icon>
 						}
 					/>
 				</BottomNavigation>
-				<BudgetDialog open={budgetOpen} onClose={() => setBudgetOpen(false)} />
+				<Budget
+					title='Set Your Budget'
+					open={budgetOpen}
+					onClose={() => setBudgetOpen(false)}
+				/>
+				<TaxRate open={taxRateOpen} onClose={() => setTaxRateOpen(false)} />
+				<Scan open={scanOpen} onClose={() => setScanOpen(false)} />
 			</Container>
 		</ThemeProvider>
 	)

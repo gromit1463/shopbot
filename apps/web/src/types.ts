@@ -7,11 +7,17 @@ export type AppFrameProps = {
 export type KeypadProps = {
 	title?: ReactNode | null | undefined
 	initialValue?: number
-	onAccept?: (value: number) => void
-	onCancel?: () => void
+	onChange?: (value: number) => void
 }
 
-export type BudgetDialogProps = {
+export type SettingsDrawerProps = {
+	open: boolean
+	title?: string
+	height?: string = 'auto'
+	children: ReactNode
+}
+
+export type DrawerProps = {
 	open: boolean
 	onClose: () => void
 }
@@ -40,10 +46,11 @@ export type GlobalProviderProps = {
 	children: ReactNode
 }
 
-export type ShoppingListState = {
+export interface ShoppingListState {
 	cart: ShoppingListItemType[]
 	budget: number
 	taxRate: number
+	taxAmount: number
 	subTotal: number
 	total: number
 	addItem: (item: ShoppingListItemType) => boolean
@@ -52,4 +59,10 @@ export type ShoppingListState = {
 	setBudget: (amt: number) => boolean
 	setTaxRate: (rate: number) => boolean
 	clearList: () => void
+}
+
+export interface ShoppingListStorage {
+	getItem: (name: string) => object | string | number | null
+	setItem: (name: string, value: string) => void
+	removeItem: (name: string) => void
 }

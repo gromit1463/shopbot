@@ -22,7 +22,8 @@
   "homepage": "https://bitbucket.org/gingerfire/shopbot-2#readme",
   "dependencies": {
     "@capacitor/cli": "^7.4.3",
-    "@capacitor/core": "^7.4.3"
+    "@capacitor/core": "^7.4.3",
+    "@capacitor/preferences": "^7.0.2"
   },
   "workspaces": [
     "apps/*"

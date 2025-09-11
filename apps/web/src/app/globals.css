@@ -17,3 +17,10 @@ body {
 	color: var(--foreground);
 	font-family: Roboto, Arial, Helvetica, sans-serif;
 }
+
+div:has(> video) {
+	z-index: 1201;
+	background-color: transparent !important;
+	top: 140px !important;
+	height: calc(100vh - 140px) !important;
+}

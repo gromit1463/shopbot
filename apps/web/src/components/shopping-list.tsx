@@ -3,11 +3,11 @@
 import { ReactElement } from 'react'
 import { TableContainer, Table, TableBody } from '@mui/material'
 import ShoppingListItem from './shopping-list-item'
-import { GlobalContextType, ShoppingListItemType } from '@/types'
-import { useGlobalContext } from '@/context/global'
+import { ShoppingListItemType } from '@/types'
+import { useShoppingListState } from '@/stores/shopping-list-state'
 
 export default function ShoppingList(): ReactElement {
-	const { items } = useGlobalContext() as GlobalContextType
+	const { cart } = useShoppingListState()
 
 	return (
 		<TableContainer
@@ -17,7 +17,7 @@ export default function ShoppingList(): ReactElement {
 		>
 			<Table stickyHeader>
 				<TableBody>
-					{items.map((item: ShoppingListItemType, i: number) => (
+					{cart.map((item: ShoppingListItemType, i: number) => (
 						<ShoppingListItem item={item} key={i} />
 					))}
 				</TableBody>
