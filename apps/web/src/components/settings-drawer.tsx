@@ -28,7 +28,7 @@ export default function SettingsDrawer({
 					<Stack className='drawer-header pb-3' direction='row' spacing={2}>
 						<Button
 							className='self-start max-w-[36px]! min-w-[36px]!'
-							appearance='text'
+							variant='text'
 							onClick={() => onClose && onClose()}
 						>
 							<Icon fontSize='large' className='material-symbols-rounded'>

@@ -13,13 +13,15 @@ export type KeypadProps = {
 export type SettingsDrawerProps = {
 	open: boolean
 	title?: string
-	height?: string = 'auto'
+	height?: string
+	onClose?: () => void
 	children: ReactNode
 }
 
 export type DrawerProps = {
 	open: boolean
-	onClose: () => void
+	title?: string
+	onClose?: () => void
 }
 
 export type ShoppingListItemType = {

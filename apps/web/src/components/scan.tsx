@@ -9,7 +9,7 @@ import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
 export default function Scan({ open, onClose }: DrawerProps): ReactElement {
-	const [scanToggle, setScanToggle] = useState<'scan' | 'manual'>('scan')
+	const [scanToggle, setScanToggle] = useState<string>('scan')
 
 	const startScan = async () => {
 		// Check camera permission
