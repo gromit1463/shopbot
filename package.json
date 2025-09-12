@@ -21,6 +21,7 @@
   },
   "homepage": "https://bitbucket.org/gingerfire/shopbot-2#readme",
   "dependencies": {
+    "@capacitor/barcode-scanner": "^2.1.0",
     "@capacitor/cli": "^7.4.3",
     "@capacitor/core": "^7.4.3",
     "@capacitor/preferences": "^7.0.2"

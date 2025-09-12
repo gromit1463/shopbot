@@ -18,9 +18,16 @@ body {
 	font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 
-div:has(> video) {
-	z-index: 1201;
-	background-color: transparent !important;
-	top: 140px !important;
-	height: calc(100vh - 140px) !important;
+#cap-os-barcode-scanner-container-dialog {
+	z-index: 1201 !important;
+	top: 140px;
+	background-color: transparent;
+}
+
+#cap-os-barcode-scanner-container-dialog .scanner-dialog-inner {
+	border: 0;
+}
+
+#cap-os-barcode-scanner-container-dialog .close-button {
+	display: none;
 }
