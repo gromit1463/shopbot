@@ -38,7 +38,7 @@ This is a monorepo containing the front-end, back-end, and native code.
 - TailwindCSS[^1]
 - MaterialUI[^1]
 - CapacitorJS (for building iOS/Android apps)
-- ZXing ("Zebra Crossing") barcode scanner[^*]
+- ZXing ("Zebra Crossing") barcode scanner[^1]
 
 ### Back-End
 
