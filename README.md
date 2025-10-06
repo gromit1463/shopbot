@@ -56,3 +56,5 @@ I'm also planning on an alternate back-end implementation in Go.
 - [upcdatabase.org](https://upcdatabase.org/)
 
 [^1]: New-to-me technology
+
+&copy; 2025 Stephen Hui. All rights reserved.
