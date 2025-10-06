@@ -34,9 +34,9 @@ This is a monorepo containing the front-end, back-end, and native code.
 
 - Typescript
 - Next.js
-- Zustand[^*]
-- TailwindCSS[^*]
-- MaterialUI[^*]
+- Zustand[^1]
+- TailwindCSS[^1]
+- MaterialUI[^1]
 - CapacitorJS (for building iOS/Android apps)
 - ZXing ("Zebra Crossing") barcode scanner[^*]
 
@@ -44,7 +44,7 @@ This is a monorepo containing the front-end, back-end, and native code.
 
 - NodeJS
 - ExpressJS
-- MongoDB[^*]
+- MongoDB[^1]
 - Fetches UPC data from [upcdatabase.org](https://upcdatabase.org/)
 
 I'm also planning on an alternate back-end implementation in Go.
@@ -52,7 +52,7 @@ I'm also planning on an alternate back-end implementation in Go.
 ### Infrastructure
 
 - Front- and back-end deployed in Vercel
-- MongoDB Atlas (cloud storage)[^*]
+- MongoDB Atlas (cloud storage)[^1]
 - [upcdatabase.org](https://upcdatabase.org/)
 
-[^*]: New-to-me technology
+[^1]: New-to-me technology
