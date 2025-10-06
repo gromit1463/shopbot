@@ -54,5 +54,3 @@ I'm also planning on an alternate back-end implementation in Go.
 - Front- and back-end deployed in Vercel
 - MongoDB Atlas (cloud storage)[^1]
 - [upcdatabase.org](https://upcdatabase.org/)
-
-[^1]: New-to-me technology
