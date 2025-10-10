@@ -4,8 +4,8 @@
   "description": "An assistant to help you keep track of your spending at the store",
   "main": "index.js",
   "scripts": {
-    "dev:web": "npm --workspace apps/web run dev",
-    "build:web": "npm --workspace apps/web run build",
+    "dev:web": "npm --workspace apps/we-nextjs run dev",
+    "build:web": "npm --workspace apps/web-next-js run build",
     "build:mobile": "npm run build:web && npx cap copy --project-dir=apps/mobile",
     "open:ios": "npx cap open ios --project-dir=apps/mobile",
     "open:android": "npx cap open android --project-dir=apps/mobile"
