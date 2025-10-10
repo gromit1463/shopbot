@@ -31,3 +31,8 @@ body {
 #cap-os-barcode-scanner-container-dialog .close-button {
 	display: none;
 }
+
+.barcode-scanner video {
+	width: 100%; /* or a fixed size like 320px+ */
+	max-width: 100%; /* ZXing works better with a reasonable resolution */
+}

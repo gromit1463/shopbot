@@ -23,7 +23,7 @@ export default function SettingsDrawer({
 			open={open}
 			anchor='bottom'
 		>
-			<Container className='max-w-sm'>
+			<Container>
 				<Stack className='w-full content-center'>
 					<Stack className='drawer-header pb-3' direction='row' spacing={2}>
 						<Button
@@ -32,7 +32,7 @@ export default function SettingsDrawer({
 							onClick={() => onClose && onClose()}
 						>
 							<Icon fontSize='large' className='material-symbols-rounded'>
-								arrow_back
+								close
 							</Icon>
 						</Button>
 						<Box className='w-full text-xl/11 text-center font-bold'>

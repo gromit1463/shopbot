@@ -69,7 +69,7 @@ export interface ShoppingListStorage {
 	removeItem: (name: string) => void
 }
 
-export const Html5QrcodeSupportedFormats = {
+export const QrcodeSupportedFormats = {
 	0: 'QR_CODE',
 	1: 'AZTEC',
 	2: 'CODABAR',
