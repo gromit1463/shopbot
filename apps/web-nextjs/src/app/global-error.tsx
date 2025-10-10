@@ -1,5 +1,6 @@
 'use client'
 
+/* eslint-disable */
 export default function GlobalError({
 	error,
 	reset,
@@ -18,3 +19,4 @@ export default function GlobalError({
 		</html>
 	)
 }
+/* eslint-enable */

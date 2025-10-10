@@ -2,11 +2,7 @@ import { useState, useEffect, ReactElement } from 'react'
 import { KeypadProps } from '@/types'
 import { Grid, Button, Icon, Box, Stack } from '@mui/material'
 
-export default function Keypad({
-	title,
-	initialValue,
-	onChange,
-}: KeypadProps): ReactElement {
+export default function Keypad({ title, onChange }: KeypadProps): ReactElement {
 	const buttonClass = 'w-[80px]! min-w-[80px]! h-[50px]! font-bold text-2xl!'
 	const [value, setValue] = useState<string>('0')
 
@@ -41,8 +37,8 @@ export default function Keypad({
 	}
 
 	useEffect(() => {
-		onChange && onChange(parseFloat(value))
-	}, [value])
+		onChange?.(parseFloat(value))
+	}, [value, onChange])
 
 	return (
 		<Stack spacing={2}>

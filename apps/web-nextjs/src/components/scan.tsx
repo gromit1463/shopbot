@@ -2,24 +2,24 @@
 
 import React, { useRef, useState, useEffect, ReactElement } from 'react'
 import { Stack, Button, Box, CircularProgress } from '@mui/material'
-import Keypad from './keypad'
+// import Keypad from './keypad'
 import SettingsDrawer from './settings-drawer'
-import { useShoppingListState } from '@/stores/shopping-list-state'
+//import { useShoppingListState } from '@/stores/shopping-list-state'
 import { DrawerProps, ALL_BARCODE_FORMATS } from '@/types'
 import { Capacitor } from '@capacitor/core'
 import { CapacitorBarcodeScanner } from '@capacitor/barcode-scanner'
-import { BrowserMultiFormatReader } from '@zxing/browser'
+import { BrowserMultiFormatReader, type IScannerControls } from '@zxing/browser'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
 export default function Scan({ open, onClose }: DrawerProps): ReactElement {
 	const [scanToggle, setScanToggle] = useState<string>('scan')
 	const [cameraLoading, setCameraLoading] = useState<boolean>(true)
-	const [loadingProduct, setLoadingProduct] = useState<boolean>(false)
+	// const [loadingProduct, setLoadingProduct] = useState<boolean>(false)
 	const [scanError, setScanError] = useState<boolean>(false)
-	const videoRef = useRef<HTMLVideoElement>(null)
+	const videoRef = useRef<HTMLVideoElement | null>(null)
 
-	let webScanner = null
+	//const webScanner = null
 
 	// const startScan = async () => {
 	// 	if (Capacitor.getPlatform() === 'web') {
@@ -42,91 +42,91 @@ export default function Scan({ open, onClose }: DrawerProps): ReactElement {
 	// }
 
 	const closeDrawer = async () => {
-		webScanner && webScanner.stop()
-		onClose && onClose()
+		//webScanner?.stop()
+		onClose?.()
 	}
 
 	function handleScanToggle(_evt: React.MouseEvent<HTMLElement>, newValue: string) {
 		if (newValue === 'scan') {
-			startScan()
+			//startScan()
 		}
 
 		setScanToggle(newValue)
 	}
 
-	const codeReader = new BrowserMultiFormatReader()
-	let stop = false
-	let controls = null
-
-	const startScanner = async () => {
-		try {
-			if (Capacitor.getPlatform() === 'web') {
-				const devices = await BrowserMultiFormatReader.listVideoInputDevices()
-				if (!devices.length) {
-					console.error('No camera devices found')
-					return
-				}
-				// console.log('devices', devices)
-
-				const selectedDeviceId = devices[0].deviceId
-
-				controls = await codeReader.decodeFromConstraints(
-					{
-						video: {
-							deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined,
-							width: { ideal: 1280 },
-							height: { ideal: 720 },
-						},
-					},
-					videoRef.current,
-					(res, err, ctrl) => {
-						if (stop) return
-						if (res) {
-							const text = res.getText()
-							//setResult(text)
-							console.log('text', text)
-
-							// optionally stop after first successful scan
-							ctrl.stop()
-						}
-						if (err) {
-							if (err.name !== 'NotFoundException') {
-								console.error(err)
-							} else {
-								console.log('Waiting for a barcode...')
-							}
-						}
-					}
-				)
-			} else {
-				setCameraLoading(false)
-
-				// Call scan
-				const result = await CapacitorBarcodeScanner.scanBarcode({
-					hint: ALL_BARCODE_FORMATS,
-				})
-
-				if (result && result.ScanResult) {
-					console.log('Scanned content:', result.ScanResult)
-					console.log('Format:', result.format)
-				} else {
-					setScanError(true)
-					console.log('Scan cancelled or no barcode found')
-				}
-			}
-		} catch (err) {
-			console.error('Error starting scanner:', err)
-		}
-	}
+	const stop = useRef(false)
+	const controls = useRef<IScannerControls>(null)
 
 	useEffect(() => {
 		if (open) {
-			startScanner()
+			;(async () => {
+				try {
+					if (Capacitor.getPlatform() === 'web') {
+						const codeReader = new BrowserMultiFormatReader()
+						const devices = await BrowserMultiFormatReader.listVideoInputDevices()
+						if (!devices.length) {
+							console.error('No camera devices found')
+							return
+						}
+						// console.log('devices', devices)
+
+						const selectedDeviceId = devices[0].deviceId
+
+						controls.current = await codeReader.decodeFromConstraints(
+							{
+								video: {
+									deviceId: selectedDeviceId
+										? { exact: selectedDeviceId }
+										: undefined,
+									width: { ideal: 1280 },
+									height: { ideal: 720 },
+								},
+							},
+							videoRef?.current || undefined,
+							(res, err, ctrl) => {
+								if (stop.current) return
+								if (res) {
+									const text = res.getText()
+									//setResult(text)
+									console.log('text', text)
+
+									// optionally stop after first successful scan
+									ctrl.stop()
+								}
+								if (err) {
+									if (err.name !== 'NotFoundException') {
+										console.error(err)
+									} else {
+										console.log('Waiting for a barcode...')
+									}
+								}
+							}
+						)
+					} else {
+						setCameraLoading(false)
+
+						// Call scan
+						const result = await CapacitorBarcodeScanner.scanBarcode({
+							hint: ALL_BARCODE_FORMATS,
+						})
+
+						if (result && result.ScanResult) {
+							console.log('Scanned content:', result.ScanResult)
+							console.log('Format:', result.format)
+						} else {
+							setScanError(true)
+							console.log('Scan cancelled or no barcode found')
+						}
+					}
+				} catch (err) {
+					console.error('Error starting scanner:', err)
+				}
+			})()
 		} else {
-			stop = true
-			controls && controls.stop()
-			const stream = videoRef.current?.srcObject as MediaStream | null
-			stream?.getTracks().forEach((track) => track.stop())
+			stop.current = true
+			controls?.current?.stop()
+			const stream = videoRef?.current?.srcObject as MediaStream | null
+			stream?.getTracks().forEach((track) => track?.stop())
 		}
 	}, [open])
 
@@ -161,7 +161,7 @@ export default function Scan({ open, onClose }: DrawerProps): ReactElement {
 							variant='contained'
 							onClick={() => {
 								setScanError(false)
-								startScan()
+								//startScan()
 							}}
 						>
 							Try again

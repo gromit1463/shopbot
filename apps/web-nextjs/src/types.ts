@@ -6,7 +6,6 @@ export type AppFrameProps = {
 
 export type KeypadProps = {
 	title?: ReactNode | null | undefined
-	initialValue?: number
 	onChange?: (value: number) => void
 }
 

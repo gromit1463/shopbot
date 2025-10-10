@@ -16,15 +16,17 @@ const storage: PersistStorage<ShoppingListState> = {
 	},
 }
 
+/* eslint-disable */
 export const useShoppingListState = create(
 	persist<ShoppingListState>(
-		(set, get) => ({
+		(set, _get) => ({
 			budget: 0,
 			taxRate: 0,
 			taxAmount: 0,
 			subTotal: 0,
 			total: 0,
 			cart: [],
+
 			addItem: ({
 				barcode,
 				name,
@@ -33,23 +35,23 @@ export const useShoppingListState = create(
 			}: ShoppingListItemType): boolean => {
 				return true
 			},
-			removeItem: (id: number): boolean => {
+			removeItem: (_id: number): boolean => {
 				return true
 			},
 			editItem: (
-				id: number,
+				_id: number,
 				{ barcode, name, quantity, unitPrice }: ShoppingListItemType
 			): boolean => {
 				return true
 			},
 			setBudget: (amt: number): boolean => {
-				set((state) => ({
+				set((_state) => ({
 					budget: amt,
 				}))
 				return true
 			},
 			setTaxRate: (rate: number): boolean => {
-				set((state) => ({
+				set((_state) => ({
 					taxRate: rate,
 				}))
 				return true
@@ -64,3 +66,4 @@ export const useShoppingListState = create(
 		}
 	)
 )
+/* eslint-enable */

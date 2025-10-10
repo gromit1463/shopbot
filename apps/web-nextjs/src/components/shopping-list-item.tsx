@@ -8,7 +8,7 @@ import {
 	MenuItem,
 	Fade,
 	Grid,
-	useMediaQuery,
+	//useMediaQuery,
 } from '@mui/material'
 import { ShoppingListItemProps } from '@/types'
 

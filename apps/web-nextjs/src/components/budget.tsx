@@ -1,5 +1,5 @@
 import { useState, ReactElement } from 'react'
-import { Box, Stack, Grid, Button } from '@mui/material'
+import { Stack, Grid, Button } from '@mui/material'
 import Keypad from './keypad'
 import SettingsDrawer from './settings-drawer'
 import { useShoppingListState } from '@/stores/shopping-list-state'
@@ -20,7 +20,7 @@ export default function Budget({ open, onClose }: DrawerProps): ReactElement {
 							className='w-full bg-green-400'
 							onClick={() => {
 								setBudget(value)
-								onClose && onClose()
+								onClose?.()
 							}}
 						>
 							Set Budget
