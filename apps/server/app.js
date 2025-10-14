@@ -15,7 +15,8 @@ app.use(cors({
 		'http://localhost:4200',
 		'https://shopbot-qa.gingerfire.com',
 		'https://shopbot.gingerfire.com',
-	]
+	],
+	preflightContinue: true,
 }))
 app.use(logger('dev'))
 app.use(express.json())
