@@ -38,11 +38,10 @@ export function get(key: string) {
 					try {
 						resolve(JSON.parse(result?.value || ''))
 					} catch (err) {
-						console.error(err)
-						reject(err)
+						resolve(null)
 					}
 				} else {
-					reject(null)
+					resolve(null)
 				}
 			})()
 		} catch (err) {
