@@ -10,7 +10,13 @@ var barcodeRouter = require('./routes/barcode')
 var app = express()
 var cors = require('cors')
 
-app.use(cors())
+app.use(cors({
+	origin: [
+		'http://localhost:4200',
+		'https://shopbot-qa.gingerfire.com',
+		'https://shopbot.gingerfire.com',
+	]
+}))
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
