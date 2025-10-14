@@ -21,6 +21,12 @@ export type DrawerProps = {
 	open: boolean
 	title?: string
 	onClose?: () => void
+	onScan: ({
+		barcode: string
+		title: string
+		msrp: number
+	}) => void
+	onError?: (msg: string) => void
 }
 
 export type ShoppingListItemType = {
@@ -88,3 +94,8 @@ export const QrcodeSupportedFormats = {
 	16: 'UPC_EAN_EXTENSION',
 }
 export const ALL_BARCODE_FORMATS = 17
+
+export type StorageItem = {
+	key: string
+	value: any
+}

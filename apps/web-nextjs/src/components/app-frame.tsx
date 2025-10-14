@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, ReactElement } from 'react'
+import { useState, useEffect, ReactElement } from 'react'
 import { AppFrameProps } from '@/types'
 import { Container, BottomNavigation, BottomNavigationAction, Icon } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
@@ -8,11 +8,26 @@ import theme from '@/theme'
 import Budget from './budget'
 import TaxRate from './tax-rate'
 import Scan from './scan'
+import { fetchapi } from '@/lib/fetch'
+import { multiPut } from '@/lib/storage'
 
 export default function AppFrame({ children }: AppFrameProps): ReactElement {
 	const [budgetOpen, setBudgetOpen] = useState<boolean>(false)
 	const [taxRateOpen, setTaxRateOpen] = useState<boolean>(false)
 	const [scanOpen, setScanOpen] = useState<boolean>(false)
+
+	useEffect(() => {
+		;(async () => {
+			const res = await fetchapi('GET', '/session/start')
+
+			if (res?.success) {
+				await multiPut([
+					{ key: 'AuthToken', value: res?.access },
+					{ key: 'RefreshToken', value: res?.refresh },
+				])
+			}
+		})()
+	}, [])
 
 	return (
 		<ThemeProvider theme={theme}>

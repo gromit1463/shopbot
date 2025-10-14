@@ -1,33 +1,37 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var createError = require('http-errors')
+var express = require('express')
+var path = require('path')
+var cookieParser = require('cookie-parser')
+var logger = require('morgan')
 
-var indexRouter = require('./routes/index');
-var barcodeRouter = require('./routes/barcode');
-var app = express();
+var indexRouter = require('./routes/index')
+var sessionRouter = require('./routes/session')
+var barcodeRouter = require('./routes/barcode')
+var app = express()
+var cors = require('cors')
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors())
+app.use(logger('dev'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', indexRouter);
-app.use('/', barcodeRouter);
+app.use('/', indexRouter)
+app.use('/', barcodeRouter)
+app.use('/', sessionRouter)
 
 // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
-// 	next(createError(404));
-// });
+// 	next(createError(404))
+// })
 
 // error handler
 // app.use(function (err, req, res, next) {
 // 	// set locals, only providing error in development
-// 	res.locals.message = err.message;
-// 	res.locals.error = req.app.get('env') === 'development' ? err : {};
+// 	res.locals.message = err.message
+// 	res.locals.error = req.app.get('env') === 'development' ? err : {}
 // 	console.error(err)
-// });
+// })
 
-module.exports = app;
+module.exports = app
