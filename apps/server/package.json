@@ -15,5 +15,8 @@
     "mongodb": "^6.19.0",
     "morgan": "~1.9.1",
     "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "@types/refresh-fetch": "^0.6.7"
   }
 }

@@ -1,5 +1,5 @@
 import { Preferences } from '@capacitor/preferences'
-import { StorageItem } from '@/types/'
+import { StorageItem } from '@/types'
 ;(async () => {
 	await Preferences.configure({
 		group: 'ShopBot',
@@ -20,39 +20,39 @@ export function multiPut(multiValue: StorageItem[]) {
 	return Promise.all(tasks)
 }
 
-export function has(key) {
+export function has(key: string) {
 	;(async () => {
-		const keys = await Preferences.keys()
+		const result = await Preferences.keys()
 
-		return keys.includes(key)
+		return result?.keys?.includes(key)
 	})()
 }
 
 // async function
 export function get(key: string) {
-	// eslint-disable-next-line no-unused-vars
 	return new Promise((resolve, reject) => {
 		try {
 			;(async () => {
-				const value = await Preferences.get({ key })
-				if (value) {
+				const result = await Preferences.get({ key })
+				if (result) {
 					try {
-						resolve(JSON.parse(value.value))
+						resolve(JSON.parse(result?.value || ''))
 					} catch (err) {
-						resolve(null)
+						console.error(err)
+						reject(err)
 					}
 				} else {
-					resolve(null)
+					reject(null)
 				}
 			})()
 		} catch (err) {
-			console.log(err)
-			resolve(null)
+			console.error(err)
+			reject(err)
 		}
 	})
 }
 
-export function remove(key) {
+export function remove(key: string) {
 	;(async () => {
 		await Preferences.remove({ key })
 	})()

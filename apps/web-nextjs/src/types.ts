@@ -1,5 +1,17 @@
 import type { ReactNode } from 'react'
 
+export type QueryStringValue = string | number | boolean
+
+export type QueryStringData = Record<string, QueryStringValue>
+
+export type JSONValue =
+	| string
+	| number
+	| boolean
+	| null
+	| JSONValue[]
+	| { [key: string]: JSONValue }
+
 export type AppFrameProps = {
 	children: ReactNode
 }
@@ -17,15 +29,20 @@ export type SettingsDrawerProps = {
 	children: ReactNode
 }
 
+export type BarcodeReaderResults = {
+	barcode: string
+	title: string
+	msrp: number
+}
+export type BarcodeReaderProps = {
+	onScan: (results: BarcodeReaderResults) => void
+	onError?: (msg: string) => void
+}
+
 export type DrawerProps = {
 	open: boolean
 	title?: string
 	onClose?: () => void
-	onScan: ({
-		barcode: string
-		title: string
-		msrp: number
-	}) => void
 	onError?: (msg: string) => void
 }
 
@@ -97,5 +114,56 @@ export const ALL_BARCODE_FORMATS = 17
 
 export type StorageItem = {
 	key: string
-	value: any
+	value: string | undefined
+}
+
+export type SessionResponse = {
+	success: boolean
+	access?: string
+	refresh?: string
+}
+
+export type UpcDatabaseResponse = {
+	_id: string
+	added_time: string
+	modified_time: string
+	title: string | null
+	alias: string | null
+	description: string | null
+	brand: string | null
+	manufacturer: string | null
+	msrp: string | null
+	ASIN: string | null
+	category: string | null
+	categories: string | null
+	stores: string[] | null
+	barcode: string | null
+	success: boolean
+	timestamp: number | null
+	images: string[] | null
+	metadata: UpcDatabaseMetadata | null
+	metanutrition: UpcDatabaseMetaNutrition | null
+}
+
+type UpcDatabaseMetadata = {
+	quantity?: string
+	countries?: string
+	ingredients?: string
+}
+
+type UpcDatabaseMetaNutrition = {
+	fat_unit: string | null
+	salt_unit: string | null
+	fiber_unit: string | null
+	'nova-group': string | null
+	energy_unit: string | null
+	sodium_unit: string | null
+	sugars_unit: string | null
+	alcohol_unit: string | null
+	proteins_unit: string | null
+	'nova-group_100g': string | null
+	'energy-kcal_unit': string | null
+	carbohydrates_unit: string | null
+	'nova-group_serving': string | null
+	'saturated-fat_unit': string | null
 }

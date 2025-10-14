@@ -33,7 +33,10 @@ router.get('/barcode', middleware.hasAuthToken, function (req, res, next) {
 
 				if (count > 0) {
 					const result = await upc.find(query).toArray()
-					res.json(result)
+
+					if (result?.length > 0) {
+						res.json(result[0])
+					}
 				} else {
 					// if it doesn't exist, call the UPC lookup service
 					const response = await fetch(`${process.env.UPCDB_URL}/product/${search}`, {

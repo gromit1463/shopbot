@@ -6,11 +6,17 @@
 
 'use client'
 
-import React, { useRef, useEffect, ReactElement } from 'react'
-import { DrawerProps, ALL_BARCODE_FORMATS } from '@/types'
+import React, { useRef, useEffect, useCallback, ReactElement } from 'react'
+import {
+	BarcodeReaderProps,
+	BarcodeReaderResults,
+	UpcDatabaseResponse,
+	ALL_BARCODE_FORMATS,
+} from '@/types'
 import { Capacitor } from '@capacitor/core'
 import { CapacitorBarcodeScanner } from '@capacitor/barcode-scanner'
 import { BrowserMultiFormatReader } from '@zxing/browser'
+import { Result } from '@zxing/library'
 import { fetchapi } from '@/lib/fetch'
 
 // Aspect ratio and crop size factor
@@ -18,22 +24,30 @@ const DESIRED_CROP_ASPECT_RATIO = 1 / 1
 const CROP_SIZE_FACTOR = 0.4
 
 export default function BarcodeReader({
-	onClose,
 	onScan,
 	onError,
-}: DrawerProps): ReactElement {
+}: BarcodeReaderProps): ReactElement {
 	const videoRef = useRef<HTMLVideoElement>(null)
 	const displayCroppedCanvasRef = useRef<HTMLCanvasElement>(null)
 	const cropOverlayRef = useRef<HTMLDivElement>(null)
 	const codeReader = useRef(new BrowserMultiFormatReader())
 
-	const closeDrawer = async () => {
-		onClose?.()
-	}
+	const lookupBarcode = useCallback(
+		async (barcode: string) => {
+			const res = (await fetchapi('GET', `${process.env.API_URL}/barcode`, {
+				search: barcode,
+			})) as UpcDatabaseResponse
 
-	async function lookupBarcode(barcode) {
-		const res = await fetchapi('GET', `${process.env.API_URL}/barcode`, {})
-	}
+			if (res?.success) {
+				onScan?.({
+					barcode: res.barcode,
+					title: res.title,
+					msrp: parseFloat(res.msrp || '0'),
+				} as BarcodeReaderResults)
+			}
+		},
+		[onScan]
+	)
 
 	useEffect(() => {
 		;(async () => {
@@ -170,11 +184,7 @@ export default function BarcodeReader({
 						hint: ALL_BARCODE_FORMATS,
 					})
 
-					if (result && result.ScanResult) {
-						console.log('Scanned content:', result.ScanResult)
-						console.log('Format:', result.format)
-					} else {
-						setScanError(true)
+					if (!result || !result.ScanResult) {
 						console.log('Scan cancelled or no barcode found')
 					}
 				}
@@ -182,7 +192,7 @@ export default function BarcodeReader({
 				console.error('Error starting scanner:', err)
 			}
 		})()
-	}, [])
+	}, [lookupBarcode, onError])
 
 	return (
 		<>

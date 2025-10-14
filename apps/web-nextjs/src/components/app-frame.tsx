@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, ReactElement } from 'react'
-import { AppFrameProps } from '@/types'
+import { AppFrameProps, SessionResponse } from '@/types'
 import { Container, BottomNavigation, BottomNavigationAction, Icon } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from '@/theme'
@@ -18,7 +18,7 @@ export default function AppFrame({ children }: AppFrameProps): ReactElement {
 
 	useEffect(() => {
 		;(async () => {
-			const res = await fetchapi('GET', '/session/start')
+			const res = (await fetchapi('GET', '/session/start')) as SessionResponse
 
 			if (res?.success) {
 				await multiPut([
