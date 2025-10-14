@@ -38,6 +38,7 @@ export function get(key: string) {
 					try {
 						resolve(JSON.parse(result?.value || ''))
 					} catch (err) {
+						console.error(err)
 						resolve(null)
 					}
 				} else {
