@@ -6,13 +6,13 @@ import { useShoppingListState } from '@/stores/shopping-list-state'
 import { DrawerProps } from '@/types'
 
 export default function Budget({ open, onClose }: DrawerProps): ReactElement {
-	const { setBudget } = useShoppingListState()
-	const [value, setValue] = useState<number>(0)
+	const { setBudget, budget } = useShoppingListState()
+	const [value, setValue] = useState<number>(budget || 0)
 
 	return (
 		<SettingsDrawer open={open} title='Set your budget' onClose={onClose}>
 			<Stack spacing={2}>
-				<Keypad onChange={setValue} />
+				<Keypad initialValue={budget} onChange={setValue} />
 				<Grid container spacing={1}>
 					<Grid size={6}>
 						<Button

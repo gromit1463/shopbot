@@ -19,16 +19,20 @@ function needsRefresh(error: Response) {
 	return error.status === 401
 }
 
-function convertToQueryString(obj: QueryStringData): string {
-	const output: Array<string> = []
+function convertToQueryString(obj: QueryStringData | null | undefined): string {
+	if (obj) {
+		const output: Array<string> = []
 
-	for (const k in obj) {
-		const key = encodeURIComponent(k)
-		const value = encodeURIComponent(obj[k])
-		output.push(`${key}=${value}`)
+		for (const k in obj) {
+			const key = encodeURIComponent(k)
+			const value = encodeURIComponent(obj[k])
+			output.push(`${key}=${value}`)
+		}
+
+		return output.join('&')
+	} else {
+		return ''
 	}
-
-	return output.join('&')
 }
 
 function doRefresh(): Promise<void> {
@@ -55,29 +59,42 @@ function doRefresh(): Promise<void> {
 }
 
 function doFetch(
-	method: string,
 	url: string,
-	data?: QueryStringData | undefined | null
+	options?: {
+		method?: string
+		body?: QueryStringData | undefined | null
+	}
 ): Promise<string | object | null> {
 	return get('AuthToken').then(function (authToken) {
+		let queryParams: string = ''
+
 		if (authToken || allowedPaths.includes(url)) {
 			const args: RequestInit = {
-				method,
+				method: options?.method || 'GET',
 				headers: {
 					Authorization: `Bearer ${authToken}`,
 					'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
 				},
 			}
 
-			if (data && method.toUpperCase() !== 'GET' && method.toUpperCase() !== 'HEAD') {
-				args.body = convertToQueryString(data)
+			if (
+				!options?.method ||
+				(options?.method?.toUpperCase() === 'GET' && options?.body)
+			) {
+				queryParams = `?${convertToQueryString(options?.body)}`
+			} else if (
+				options?.method?.toUpperCase() !== 'GET' &&
+				options?.method?.toUpperCase() !== 'HEAD'
+			) {
+				args.body = convertToQueryString(options?.body)
 			}
 
-			return fetchJSON(`${process.env.NEXT_PUBLIC_API_URL}${url}`, args).then(
-				(res) => {
-					return res.body
-				}
-			)
+			return fetchJSON(
+				`${process.env.NEXT_PUBLIC_API_URL}${url}${queryParams}`,
+				args
+			).then((res) => {
+				return res.body
+			})
 		} else {
 			return null
 		}

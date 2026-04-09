@@ -4,8 +4,16 @@ import { ShoppingListState } from '@/types'
 import { useShoppingListState } from '@/stores/shopping-list-state'
 
 export default function ProgressBar(): ReactElement {
-	const { budget, subTotal, taxRate, taxAmount, total } =
-		useShoppingListState() as ShoppingListState
+	// const { budget, subTotal, taxRate, taxAmount, total } =
+	// 	useShoppingListState() as ShoppingListState
+
+	const { budget, subTotal, taxRate, taxAmount, total } = {
+		budget: 10,
+		subTotal: 7.05,
+		taxRate: 6,
+		taxAmount: 0.42,
+		total: 7.48,
+	}
 
 	const subTotalW: number = (subTotal / budget) * 100
 	const taxAmountW: number = (taxAmount / budget) * 100

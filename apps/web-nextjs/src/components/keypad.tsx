@@ -1,10 +1,14 @@
 import { useState, useEffect, ReactElement } from 'react'
 import { KeypadProps } from '@/types'
-import { Grid, Button, Icon, Box, Stack } from '@mui/material'
+import { Grid, Button, Icon, Box, Stack, TextField } from '@mui/material'
 
-export default function Keypad({ title, onChange }: KeypadProps): ReactElement {
-	const buttonClass = 'w-[80px]! min-w-[80px]! h-[50px]! font-bold text-2xl!'
-	const [value, setValue] = useState<string>('0')
+export default function Keypad({
+	title,
+	initialValue,
+	onChange,
+}: KeypadProps): ReactElement {
+	const buttonClass = 'w-full h-[50px]! font-bold text-2xl!'
+	const [value, setValue] = useState<string>(initialValue?.toString() || '0')
 
 	function addDigit(digit: string) {
 		if ((digit === '.' && value.indexOf('.') > -1) || value.length >= 10) {
@@ -43,10 +47,18 @@ export default function Keypad({ title, onChange }: KeypadProps): ReactElement {
 	return (
 		<Stack spacing={2}>
 			{title !== undefined && title !== null && title}
-			<Box className='text-3xl text-right min-w-[260px] max-w-[260px] m-auto! p-2 border rounded-sm'>
-				{value}
-			</Box>
-			<Grid container spacing={1} className='w-[260px] m-auto! py-3'>
+			<TextField
+				className='text-3xl w-full'
+				sx={{
+					'& input': {
+						textAlign: 'right',
+						fontSize: '32px',
+					},
+				}}
+				value={value}
+				variant='outlined'
+			/>
+			<Grid container spacing={1} className='py-3'>
 				<Grid size={4}>
 					<Button
 						variant='outlined'

@@ -18,6 +18,7 @@ export type AppFrameProps = {
 
 export type KeypadProps = {
 	title?: ReactNode | null | undefined
+	initialValue?: number | null | undefined
 	onChange?: (value: number) => void
 }
 
@@ -37,6 +38,10 @@ export type BarcodeReaderResults = {
 export type BarcodeReaderProps = {
 	onScan: (results: BarcodeReaderResults) => void
 	onError?: (msg: string) => void
+}
+
+export type ManualEntryProps = {
+	onDone: (results: BarcodeReaderResults) => void
 }
 
 export type DrawerProps = {

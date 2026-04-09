@@ -1,0 +1,15 @@
+{
+  "state": {
+    "budget": 200,
+    "taxRate": 0,
+    "taxAmount": 0,
+    "subTotal": 0,
+    "total": 0,
+    "cart": [{
+      "barcode": "4011",
+      "name": "Bananas",
+      "quantity": 2,
+      "unitPrice": 0.69
+    }]
+  }
+}

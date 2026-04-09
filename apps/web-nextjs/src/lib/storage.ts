@@ -36,7 +36,8 @@ export function get(key: string) {
 				const result = await Preferences.get({ key })
 				if (result) {
 					try {
-						resolve(JSON.parse(result?.value || ''))
+						const data = JSON.parse(result?.value || 'null')
+						resolve(data)
 					} catch (err) {
 						console.error(err)
 						reject(err)

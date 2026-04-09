@@ -6,13 +6,13 @@ import { useShoppingListState } from '@/stores/shopping-list-state'
 import { DrawerProps } from '@/types'
 
 export default function TaxRate({ open, onClose }: DrawerProps): ReactElement {
-	const { setTaxRate } = useShoppingListState()
-	const [value, setValue] = useState<number>(0)
+	const { setTaxRate, taxRate } = useShoppingListState()
+	const [value, setValue] = useState<number>(taxRate || 0)
 
 	return (
 		<SettingsDrawer open={open} title='Set your tax rate (%)' onClose={onClose}>
 			<Stack spacing={2}>
-				<Keypad onChange={setValue} />
+				<Keypad initialValue={taxRate} onChange={setValue} />
 				<Grid container spacing={1}>
 					<Grid size={6}>
 						<Button

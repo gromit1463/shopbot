@@ -22,5 +22,8 @@
   "homepage": "https://bitbucket.org/gingerfire/shopbot-2#readme",
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.14"
+  }
 }

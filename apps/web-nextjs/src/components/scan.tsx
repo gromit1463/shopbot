@@ -5,9 +5,11 @@ import { Stack, Button, Box } from '@mui/material'
 // import Keypad from './keypad'
 import SettingsDrawer from './settings-drawer'
 //import { useShoppingListState } from '@/stores/shopping-list-state'
-import { DrawerProps } from '@/types'
+import { BarcodeReaderResults, DrawerProps } from '@/types'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
+import BarcodeReader from './barcode-reader'
+import ManualEntry from './manual-entry'
 
 export default function Scan({ open, onClose }: DrawerProps): ReactElement {
 	const [scanToggle, setScanToggle] = useState<string>('scan')
@@ -18,12 +20,16 @@ export default function Scan({ open, onClose }: DrawerProps): ReactElement {
 	}
 
 	function handleScanToggle(_evt: React.MouseEvent<HTMLElement>, newValue: string) {
-		if (newValue === 'scan') {
-			//startScan()
-		}
+		console.log(newValue)
 
 		setScanToggle(newValue)
 	}
+
+	function barcodeScanned(payload: BarcodeReaderResults) {
+		console.log(payload)
+	}
+
+	function manuallyEntered(payload: BarcodeReaderResults) {}
 
 	return (
 		<SettingsDrawer open={open} onClose={closeDrawer} title='Scan Item' height='100vh'>
@@ -40,6 +46,8 @@ export default function Scan({ open, onClose }: DrawerProps): ReactElement {
 						Enter Manually
 					</ToggleButton>
 				</ToggleButtonGroup>
+				{scanToggle === 'scan' && <BarcodeReader onScan={barcodeScanned} />}
+				{scanToggle === 'manual' && <ManualEntry onDone={manuallyEntered} />}
 				{scanError && (
 					<Stack spacing={2} alignItems='center'>
 						<Box>Something went wrong with the scan.</Box>

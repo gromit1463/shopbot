@@ -18,7 +18,7 @@ export default function AppFrame({ children }: AppFrameProps): ReactElement {
 
 	useEffect(() => {
 		;(async () => {
-			const res = (await fetchapi('GET', '/session/start')) as SessionResponse
+			const res = (await fetchapi('/session/start')) as SessionResponse
 
 			if (res?.success) {
 				await multiPut([
