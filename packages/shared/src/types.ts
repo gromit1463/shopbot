@@ -11,15 +11,32 @@ export interface ApiFailure {
 }
 
 /** A product record from the UPC lookup service, as cached in MongoDB. */
+
+interface UpcProductStore {
+	store: string
+	price: string
+	url?: string
+}
+
 export interface UpcProduct {
-	success: true
 	/** Zero-padded to BARCODE_LENGTH digits (see padBarcode). */
+	added_time: string
+	modified_time: string
+	title: string
 	barcode: string
-	title?: string
 	alias?: string
 	description?: string
 	brand?: string
 	manufacturer?: string
+	msrp?: string
+	ASIN?: string
 	category?: string
-	[key: string]: unknown
+	categories?: string
+	stores?: UpcProductStore[]
+	metadata?: Record<string, string>
+	images?: string[]
+	reviews?: {
+		thumbsup: number
+		thumbsdown: number
+	}
 }

@@ -4,10 +4,13 @@ import { fileURLToPath } from 'url'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import cors from 'cors'
+import { dbReady } from './src/lib/api-db.ts'
 
-import indexRouter from './src/routes/index.js'
-import sessionRouter from './src/routes/session.js'
-import barcodeRouter from './src/routes/barcode.js'
+import indexRouter from './src/routes/index.ts'
+import sessionRouter from './src/routes/session.ts'
+import barcodeRouter from './src/routes/barcode.ts'
+
+await dbReady
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)

@@ -17,5 +17,9 @@
 		"mongodb": "^7.8.0",
 		"mongoose": "^9.11.4",
 		"morgan": "^1.12.1"
+	},
+	"devDependencies": {
+		"@types/express": "^5.0.6",
+		"@types/node": "^26.6.6"
 	}
 }
