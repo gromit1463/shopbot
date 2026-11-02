@@ -6,6 +6,8 @@ if (!ACCESS_TOKEN_SECRET) {
 	throw new TypeError('Environment variable ACCESS_TOKEN_SECRET is not set')
 }
 
+const accessSecret: string = ACCESS_TOKEN_SECRET
+
 export function hasAuthToken(req: Request, res: Response, next: NextFunction) {
 	const token = req.headers.authorization
 
@@ -14,7 +16,7 @@ export function hasAuthToken(req: Request, res: Response, next: NextFunction) {
 	}
 
 	try {
-		const decoded = jwt.verify(token.replace(/^Bearer\s+/, ''), ACCESS_TOKEN_SECRET)
+		const decoded = jwt.verify(token.replace(/^Bearer\s+/, ''), accessSecret)
 		if (decoded) {
 			return next()
 		}

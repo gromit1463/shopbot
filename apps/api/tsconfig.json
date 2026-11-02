@@ -4,8 +4,9 @@
 		"outDir": "dist",
 		"rootDir": "src",
 		"lib": ["ES2022", "DOM"],
-		"types": ["node"]
+		"types": ["node"],
+		"rewriteRelativeImportExtensions": true,
+		"declaration": false
 	},
-	"include": ["src"],
-	"allowImportingTsExtensions": true
+	"include": ["src"]
 }
