@@ -1,58 +1,60 @@
-# Shopbot
+> [!IMPORTANT]
+> This project is a work-in-progress
 
-pnpm + Turborepo monorepo.
+# ShopBot
 
-```
-apps/
-  api/            Express API (ESM): barcode lookup + session tokens
-  web/            (add) Next.js web build
-  mobile/         (add) React Native / Expo app
-packages/
-  shared/         @shopbot/shared      types + barcode helpers, used by every app
-  api-client/     @shopbot/api-client  typed fetch client for the API, works in web and React Native
-```
+ShopBot is a handy assistant when you're shopping on a budget.
 
-## Commands
+Before you start your journey through a brick-and-mortar store, set your budget and sales tax rate. As you pick items off the shelves, scan the UPC barcode, set the quantity and unit price, then place the item(s) in your cart.
 
-```sh
-pnpm install
-pnpm build        # builds packages/* first, then apps
-pnpm dev          # watches packages and runs the API on :4200
-pnpm typecheck
-```
+ShopBot keeps track of your cart total, and shows you how much of your budget you have used so far.
 
-The API reads `apps/api/.env` in dev (copy `apps/api/.env.example`). In production, inject the same variables through your host.
+## History
 
-## Adding the apps
+I got this idea about around 2015 when I was grocery shopping with my wife. We needed something to help us stay on budget.
 
-Create them from the repo root so they join the workspace:
+The first version was a simple HTML/CSS/JS app using jQuery.
 
-```sh
-pnpm dlx create-next-app@latest apps/web
-pnpm dlx create-expo-app@latest apps/mobile
-```
+As we used the app, I thought it would be cool to integrate a barcode scanner to make adding items to the cart faster and easier, rather than manually typing the name of the item every time.
 
-Then give each one the shared packages (use the `name` from each app's package.json for `--filter`):
+This new version comes from a desire to integrate the technologies I've learned since the first version, along with some newer technologies that I hadn't learned yet.
 
-```sh
-pnpm add @shopbot/shared @shopbot/api-client --workspace --filter <web-package-name>
-pnpm add @shopbot/shared @shopbot/api-client --workspace --filter <mobile-package-name>
-```
+## Features
 
-```ts
-import { createShopbotClient } from '@shopbot/api-client'
+- MaterialUI for a beatiful and responsive app, and rapid prototyping
+- A barcode scanner to make adding items quick and easy
+- Also provides a manual input mode in case the barcode scanner doesn't find the item in the database, or if you just prefer manual input
+- A server API is included to query an online UPC database and cache responses in a MongoDB collection
 
-const api = createShopbotClient({
-	baseUrl: process.env.EXPO_PUBLIC_API_URL!, // NEXT_PUBLIC_API_URL on web
-	getAccessToken: () => tokenStore.access,
-})
+## Tech Stack
 
-const { access, refresh } = await api.startSession()
-const product = await api.lookupBarcode('012345678905')
-```
+This is a monorepo containing the front-end, back-end, and native code.
 
-If Metro fails to resolve workspace packages under pnpm, add `node-linker=hoisted` to a root `.npmrc` and reinstall.
+### Front-End
 
-## Adding a new shared package
+- Typescript
+- Next.js
+- Zustand[^1]
+- TailwindCSS[^1]
+- MaterialUI[^1]
+- CapacitorJS (for building iOS/Android apps)
+- ZXing ("Zebra Crossing") barcode scanner[^1]
 
-Copy `packages/shared` (package.json, tsconfig.json, `src/`), rename it to `@shopbot/<name>`, and add it as a `workspace:*` dependency wherever it is used. Packages build to `dist/` so Node, Next and Metro all consume plain ESM plus type declarations.
+### Back-End
+
+- NodeJS
+- ExpressJS
+- MongoDB[^1]
+- Fetches UPC data from [upcdatabase.org](https://upcdatabase.org/)
+
+I'm also planning on an alternate back-end implementation in Go.
+
+### Infrastructure
+
+- Front- and back-end deployed in Vercel
+- MongoDB Atlas (cloud storage)[^1]
+- [upcdatabase.org](https://upcdatabase.org/)
+
+[^1]: New-to-me technology
+
+&copy; 2025 Stephen Hui. All rights reserved.

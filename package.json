@@ -1,18 +1,29 @@
 {
-	"name": "shopbot",
-	"private": true,
-	"packageManager": "pnpm@10.28.0",
-	"engines": {
-		"node": ">=20.6"
-	},
-	"scripts": {
-		"build": "turbo run build",
-		"dev": "turbo run dev",
-		"typecheck": "turbo run typecheck",
-		"clean": "turbo run clean && rm -rf node_modules"
-	},
-	"devDependencies": {
-		"turbo": "^2.11.10",
-		"typescript": "^7.0.2"
-	}
+  "name": "shopbot",
+  "version": "1.0.0",
+  "description": "An assistant to help you keep track of your spending at the store",
+  "main": "index.js",
+  "scripts": {
+    "dev:web": "npm --workspace apps/we-nextjs run dev",
+    "build:web": "npm --workspace apps/web-next-js run build",
+    "build:mobile": "npm run build:web && npx cap copy --project-dir=apps/mobile",
+    "open:ios": "npx cap open ios --project-dir=apps/mobile",
+    "open:android": "npx cap open android --project-dir=apps/mobile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/gingerfire/shopbot-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/gingerfire/shopbot-2/issues"
+  },
+  "homepage": "https://bitbucket.org/gingerfire/shopbot-2#readme",
+  "workspaces": [
+    "apps/*"
+  ],
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.14"
+  }
 }
