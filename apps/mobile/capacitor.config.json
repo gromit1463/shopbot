@@ -1,6 +1,0 @@
-{
-  "appId": "com.gingerfire.shopbot",
-  "appName": "ShopBot",
-  "webDir": "../web/out",
-  "bundledWebRuntime": false
-}
