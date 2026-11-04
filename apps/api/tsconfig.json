@@ -4,8 +4,10 @@
 		"outDir": "dist",
 		"rootDir": "src",
 		"lib": ["ES2022", "DOM"],
-		"types": ["node"]
+		"types": ["node"],
+		"typeRoots": ["./node_modules/@types", "../../node_modules/@types"],
+		"rewriteRelativeImportExtensions": true,
+		"declaration": false
 	},
-	"include": ["src"],
-	"allowImportingTsExtensions": true
+	"include": ["src"]
 }
